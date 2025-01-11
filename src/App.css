@@ -43,4 +43,6 @@ body {
 .pokemon img {
   margin: auto;
   display: block;
+  width: 200px;
+  height: 200px;
 }
