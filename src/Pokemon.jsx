@@ -8,7 +8,7 @@ import "./App.css";
 
 const Pokemon = ({ flags }) => {
   const [pokémon, setPokémon] =
-    useState("pidgey");
+      useState("pidgey");
   const [img, setImg] = useState("pidgey");
 
   useEffect(() => {
@@ -20,25 +20,17 @@ const Pokemon = ({ flags }) => {
 
     if (pokémon.length >= 4) {
       fetch(
-        `https://pokeapi.co/api/v2/pokemon/${pokémon}/`
+          `https://pokeapi.co/api/v2/pokemon/${pokémon}/`
       )
-        .then((res) => res.json())
-        .then((res) => {
-          if (
-            isCurrent &&
-            isAllowed(res.types, flags)
-          ) {
-            setPokémon(
-              res.name.replace(/^\w/, (c) =>
-                c.toUpperCase()
-              )
-            ); // capitalizing name
+          .then((res) => res.json())
+          .then((res) => {
+            console.log('resresres', res)
             setImg(res.sprites.front_default);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+            setImg('');
+          });
     }
 
     return () => {
@@ -47,34 +39,34 @@ const Pokemon = ({ flags }) => {
   }, [pokémon]);
 
   return (
-    <>
-      <div className="pokemon">
-        <div>
-          <input
-            onChange={(e) =>
-              setPokémon(e.target.value)
-            }
-            defaultValue={pokémon}
-            type="text"
-          />
+      <>
+        <div className="pokemon">
+          <div>
+            <input
+                onChange={(e) =>
+                    setPokémon(e.target.value)
+                }
+                defaultValue={pokémon}
+                type="text"
+            />
+          </div>
+          Hello, {pokémon}!
+          <img src={img} />
         </div>
-        Hello, {pokémon}!
-        <img src={img} />
-      </div>
-    </>
+      </>
   );
 };
 
 function isAllowed(types, flags) {
   return (
-    flags.testaroni === "all" ||
-    types
-      .map((t) => {
-        return t.type.name;
-      })
-      .some((e) => {
-        return e === flags.testaroni;
-      })
+      flags.testaroni === "all" ||
+      types
+          .map((t) => {
+            return t.type.name;
+          })
+          .some((e) => {
+            return e === flags.testaroni;
+          })
   );
 }
 
