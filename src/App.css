@@ -21,7 +21,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 40px;
-  background: red;
+  background: yellow;
   height: 50%;
 }
 .pokemon input {
