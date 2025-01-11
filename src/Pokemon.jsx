@@ -24,20 +24,12 @@ const Pokemon = ({ flags }) => {
       )
         .then((res) => res.json())
         .then((res) => {
-          if (
-            isCurrent &&
-            isAllowed(res.types, flags)
-          ) {
-            setPokémon(
-              res.name.replace(/^\w/, (c) =>
-                c.toUpperCase()
-              )
-            ); // capitalizing name
+            console.log('resresres', res)
             setImg(res.sprites.front_default);
-          }
         })
         .catch((error) => {
           console.log(error);
+          setImg('');
         });
     }
 
